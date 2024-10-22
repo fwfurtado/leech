@@ -1,0 +1,16 @@
+version: '3'
+
+tasks:
+
+  release:
+    desc: Release a new version
+    cmds:
+      - cargo build --release --bin leech
+  install:
+    deps:
+      - release
+    desc: Install CLI
+    cmds:
+      - install target/release/leech ~/.local/bin/
+      - install -m 0644 target/release/leech.1  ~/.local/share/man/man1
+      - install -m 0644 target/release/completions/leech.fish ~/.config/fish/completions/
